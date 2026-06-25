@@ -32,10 +32,19 @@ visibility into each piece.
    and the background scheduler (reminders, nudges, daily briefing) keep
    running continuously. The Free plan spins down on inactivity, which would
    silently break reminders.
-8. Before clicking Create, scroll to **Environment Variables** and add every
+8. **Pin the Python version.** Render's current default for new services is
+   Python 3.14, which doesn't yet have prebuilt wheels for `pydantic-core`
+   (a dependency of FastAPI/Anthropic's SDK). Without pinning, the build
+   tries to compile it from source via Rust/maturin and fails with a
+   `Read-only file system` error. This repo already includes a
+   `.python-version` file pinning Python to `3.12.7`, which Render picks up
+   automatically — no action needed as long as that file is committed.
+   If you ever see the same maturin/Cargo error again, double check that
+   file made it into your repo and wasn't excluded by `.gitignore`.
+9. Before clicking Create, scroll to **Environment Variables** and add every
    key from `.env.example` EXCEPT `WEBHOOK_PORT` (Render sets `$PORT` itself).
    Paste the Postgres Internal Database URL from step 1 into `DATABASE_URL`.
-9. Click **Create Web Service** and wait for the first deploy to finish.
+10. Click **Create Web Service** and wait for the first deploy to finish.
 
 ## 3. Run the DB init script once
 

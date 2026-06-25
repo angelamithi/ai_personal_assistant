@@ -17,6 +17,15 @@ This is a **separate project** from `ai-social-agent`. It uses its own:
 
 It does **not** share infrastructure with the social-posting agent, by design — different product, different scaling/debugging needs.
 
+## Setup — start here
+
+This README covers architecture only. For actual step-by-step setup:
+
+1. **Test locally first** → see `TESTING.md` (run the server on your machine, fake WhatsApp messages with curl, confirm the logic works before touching Meta or Render at all)
+2. **Deploy for real** → see `render.md` (covers creating the Postgres database, the Render web service, setting all environment variables, and wiring up the actual Meta/WhatsApp webhook — in that order, since each step depends on values from the one before it)
+
+Skipping straight to `render.md` is fine too if you'd rather test against the live deployment from the start.
+
 ## How it works
 
 1. WhatsApp message (text or voice) hits `POST /webhook` in `webhook_server.py`.

@@ -1,0 +1,23 @@
+# Environment / secrets — never commit real credentials
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Local SQLite test databases
+*.db
+
+# Editor/OS cruft
+.DS_Store
+.vscode/
+
+# IMPORTANT: do NOT add .python-version here. Render reads it directly from
+# the repo to pick the Python version at build time (see render.md, step 2.8).
+# If it's excluded or never committed, Render falls back to its current
+# default (Python 3.14 as of Feb 2026), which breaks the build because
+# pydantic-core has no prebuilt wheel for it yet and fails compiling from
+# source on Render's read-only filesystem.
